@@ -5,14 +5,14 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.0
+    jupytext_version: 1.14.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
-+++ {"tags": [], "user_expressions": []}
++++ {"user_expressions": []}
 
 (rasterio_png)=
 # Making a png  composite image
@@ -51,10 +51,6 @@ import a301_lib  # noqa
 pacific = pytz.timezone("US/Pacific")
 date = datetime.datetime.today().astimezone(pacific)
 print(f"written on {date}")
-```
-
-```{code-cell} ipython3
-
 ```
 
 ```{code-cell} ipython3
@@ -109,7 +105,7 @@ sns.jointplot(
 )
 ```
 
-+++ {"tags": [], "user_expressions": []}
++++ {"user_expressions": []}
 
 * I'm okay with changing the data values to get a qualitative feeling
   for the image.  To do this, I can use the [scikit-image equalization module](https://scikit-image.org/docs/dev/auto_examples/color_exposure/plot_equalize.html)
@@ -194,7 +190,7 @@ Band 5 (near-ir now mapped to red) are reflecting, which makes purple.
 Image(filename=png_filename)
 ```
 
-+++ {"tags": [], "user_expressions": []}
++++ {"user_expressions": []}
 
 ## move to rioxarray
 
@@ -202,6 +198,19 @@ Image(filename=png_filename)
 van_array = rioxarray.open_rasterio(van_tif)
 van_array
 ```
+
+#### todo 1: use my new function: get_landsat_datasets to get bands 3, 4, 5 for vancouver
+
+Below I find the window you'll need to pass to the function
+
+Save this as a new dataset as netdf
+
+if download:
+   go to nasa and grab the scene
+else:
+   read the netcdf
+   
+go back to the top and rewrite using the dataset instead of original xarray
 
 ```{code-cell} ipython3
 van_array.rio.crs
@@ -219,7 +228,7 @@ type(van_array)
 van_array.data.shape
 ```
 
-+++ {"tags": [], "user_expressions": []}
++++ {"user_expressions": []}
 
 ### replace data with histogram stretch
 
@@ -241,7 +250,7 @@ outfile = notebook_dir / "rio_van.png"
 png_array.rio.to_raster(outfile)
 ```
 
-+++ {"tags": [], "user_expressions": []}
++++ {"user_expressions": []}
 
 ## Find the clipping window to download original files into a new dataset
 
