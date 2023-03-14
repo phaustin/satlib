@@ -194,7 +194,7 @@ Band 5 (near-ir now mapped to red) are reflecting, which makes purple.
 Image(filename=png_filename)
 ```
 
-+++ {"user_expressions": [], "tags": []}
++++ {"tags": [], "user_expressions": []}
 
 ## move to rioxarray
 
@@ -215,6 +215,10 @@ van_array.rio.transform()
 type(van_array)
 ```
 
+```{code-cell} ipython3
+van_array.data.shape
+```
+
 +++ {"tags": [], "user_expressions": []}
 
 ### replace data with histogram stretch
@@ -225,7 +229,7 @@ png_array.data = channels.data
 ```
 
 ```{code-cell} ipython3
-png_array.plot.imshow()
+png_array.plot.imshow(figsize = (6,9));
 ```
 
 ```{code-cell} ipython3
@@ -237,7 +241,7 @@ outfile = notebook_dir / "rio_van.png"
 png_array.rio.to_raster(outfile)
 ```
 
-+++ {"user_expressions": [], "tags": []}
++++ {"tags": [], "user_expressions": []}
 
 ## Find the clipping window to download original files into a new dataset
 
